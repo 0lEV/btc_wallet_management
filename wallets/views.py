@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+from wallets.utils import successful_response, create_rpc_connection
 import json
 
 
@@ -30,12 +29,5 @@ def get_addresses(request):
 
 
 
-def create_rpc_connection(params):
-    username = params.get('username')
-    password = params.get('password')
-    server = params.get('server')
-    return AuthServiceProxy("http://%s:%s@%s" % (username, password, server))
 
-def successful_response(data):
-    return JsonResponse({'data': data})
 
