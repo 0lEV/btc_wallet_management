@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Wallet Management</title>
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">JSON-RPC Credentials:</h5>
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Server address</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control-plaintext" placeholder="127.0.0.1[:8332]"
+                               v-model="form.server">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control-plaintext" v-model="form.username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control-plaintext" v-model="form.password">
+                    </div>
+                </div>
+                <button class="btn btn-default" @click="checkBalance()" :disabled="!buttons.balance">Check balance</button>
+                <button class="btn btn-default" @click="getNewAddress()" :disabled="!buttons.newAddress">Create new address</button>
+            </div>
+        </div>
+
+        <table class="table table-borderless">
+            <tr>
+                <td>Balance:</td>
+                <td>My Addresses:</td>
+            </tr>
+            <tr>
+                <td><h1>[[balance]]</h1></td>
+                <td>
+                    <ul class="list-group">
+                        <li v-for="address in addresses" class="list-group-item">[[address]]</li>
+                    </ul>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
