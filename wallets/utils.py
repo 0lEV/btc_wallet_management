@@ -18,4 +18,4 @@ def success_response(data):
 
 
 def error_response(error: str):
-    return make_response(error=error)
+    return make_response(error='Error: ' + error)
