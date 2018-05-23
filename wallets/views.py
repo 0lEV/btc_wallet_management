@@ -23,7 +23,8 @@ def check_balance(request):
     rpc_connection = create_rpc_connection(params)
     try:
         res = rpc_connection.getbalance('')
-        return success_response(res)
+        balance = "{:f} BTC".format(res)
+        return success_response(balance)
     except JSONRPCException as e:
         return error_response(e.message)
 
