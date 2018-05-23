@@ -10,7 +10,13 @@ $.postJson = function (url, data) {
         data: JSON.stringify(data),
         processData: false,
     })
-        .done(function(res) {deferred.resolve(res)})
+        .done(function(res) {
+            if (res.error) {
+                deferred.reject(res.error)
+            } else {
+                deferred.resolve(res)
+            }
+        })
         .fail(function(res) {deferred.reject(res)});
     return deferred;
 };
@@ -46,7 +52,7 @@ var app = new Vue({
                     self.balance = res.data;
                 })
                 .fail(function (res) {
-                    console.error(res)
+                    alert(res)
                 })
                 .always(function () {
                     self.buttons.balance = true;
@@ -61,7 +67,7 @@ var app = new Vue({
                     self.addresses.push(res.data);
                 })
                 .fail(function (res) {
-                    console.error(res)
+                    alert(res)
                 })
                 .always(function () {
                     self.buttons.newAddress = true;
@@ -75,7 +81,7 @@ var app = new Vue({
                     self.addresses = res.data;
                 })
                 .fail(function (res) {
-                    console.error(res)
+                    alert(res)
                 });
         }
     }

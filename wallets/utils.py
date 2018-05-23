@@ -8,5 +8,14 @@ def create_rpc_connection(params):
     server = params.get('server')
     return AuthServiceProxy("http://%s:%s@%s" % (username, password, server))
 
-def successful_response(data):
-    return JsonResponse({'data': data})
+
+def make_response(data=None, error=''):
+    return JsonResponse({'data': data, 'error': error})
+
+
+def success_response(data):
+    return make_response(data)
+
+
+def error_response(error: str):
+    return make_response(error=error)
