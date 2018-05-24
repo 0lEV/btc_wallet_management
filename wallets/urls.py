@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^newaddress$', views.get_new_address, name='new_address'),
     url(r'^addresses$', views.get_addresses, name='addresses'),
     url(r'^accountaddress$', views.get_account_address, name='accountaddress'),
+    url(r'^transactions$', views.list_transactions, name='transactions'),
 ]

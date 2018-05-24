@@ -31,6 +31,7 @@ var app = new Vue({
             password: 'test'
         },
         addresses: [],
+        transactions: [],
         balance: 'N/A',
         //Enables or disables buttons
         buttons: {
@@ -41,6 +42,7 @@ var app = new Vue({
     mounted: function () {
         this.getAddresses();
         this.checkBalance();
+        this.listTransactions();
     },
     methods: {
         checkBalance: function() {
@@ -79,6 +81,19 @@ var app = new Vue({
                 .done(function (res) {
                     console.log(res.data);
                     self.addresses = res.data;
+                })
+                .fail(function (res) {
+                    alert(res)
+                });
+        },
+        listTransactions: function () {
+            var self = this;
+            $.postJson('/transactions', this.form)
+                .done(function (res) {
+                    console.log(res.data);
+                    self.transactions = res.data.map(function (trans) {
+                        return 'txid: ' + trans.txid + '\r\naddress: ' + trans.address + '\r\namount: ' + trans.amount;
+                    });
                 })
                 .fail(function (res) {
                     alert(res)

@@ -49,6 +49,16 @@ def get_addresses(request):
         return error_response(e.message)
 
 
+def list_transactions(request):
+    params = json.loads(request.body)
+    rpc_connection = create_rpc_connection(params)
+    try:
+        res = rpc_connection.listtransactions()
+        return success_response(res)
+    except JSONRPCException as e:
+        return error_response(e.message)
+
+
 
 
 

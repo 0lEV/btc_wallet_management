@@ -6,7 +6,7 @@ def create_rpc_connection(params):
     username = params.get('username')
     password = params.get('password')
     server = params.get('server')
-    return AuthServiceProxy("http://%s:%s@%s" % (username, password, server))
+    return AuthServiceProxy("http://%s:%s@%s" % (username, password, server), timeout=120)
 
 
 def make_response(data=None, error=''):
