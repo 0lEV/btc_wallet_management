@@ -26,7 +26,7 @@ var app = new Vue({
     delimiters: ['[[', ']]'],
     data: {
         form: {
-            server: '192.168.0.10:8332',
+            server: '127.0.0.1:8332',
             username: 'test',
             password: 'test'
         },
